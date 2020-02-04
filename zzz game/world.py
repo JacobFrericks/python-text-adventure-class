@@ -13,9 +13,9 @@ class MapTile:
         return ""
 
 world = [
-    ["x","x","x","e"],
-    ["e","s","e","x"],
-    ["x","x","e","v"]
+    ["x", "x", "x", "e"],
+    ["e", "s", "e", "x"],
+    ["x", "x", "e", "v"]
 ]
 
 start_location = 1, 1

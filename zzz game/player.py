@@ -27,6 +27,8 @@ class PlayerLink:
     def is_alive(self):
         if self.hp < 1:
             return False
+        else:
+            return True
 
     def inventory(self):
         print(self.inv)

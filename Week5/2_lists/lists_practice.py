@@ -31,6 +31,7 @@ print("*******")
 
 # Shorter way to create a list of ordered numbers
 my_list = range(1, 4)
+print(my_list)
 print(my_list[0])
 print(my_list[1])
 print(my_list[2])

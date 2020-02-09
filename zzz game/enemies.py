@@ -5,6 +5,8 @@ class Enemies:
     def is_alive(self):
         if self.hp < 1:
             return False
+        else:
+            return True
 
 class OctoRock(Enemies):
     def __init__(self):

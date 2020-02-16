@@ -14,18 +14,29 @@ class MapTile:
     def modify_player(self, player):
         return ""
 
-world = [
+    def __str__(self):
+        return self.intro_text()
+
+world_map = [
     ["x", "x", "x", "e"],
     ["e", "s", "e", "x"],
+    ["x", "x", "e", "e"],
     ["x", "x", "e", "v"]
 ]
 
+world = []
+
+def create_world():
+    for y in range(len(world_map)):
+        world.append([])
+        for x in range(len(world_map[y])):
+            world[y].append(get_tile(x, y))
+    return world
+
 start_location = 1, 1
 
-def tile_at(x, y):
-    if x < 0 or y < 0:
-        return None
-    tile = world[y][x]
+def get_tile(x, y):
+    tile = world_map[y][x]
     if tile == "x":
         return EmptyTile(x, y)
     if tile == "e":
@@ -34,6 +45,14 @@ def tile_at(x, y):
         return VicTile(x, y)
     if tile == "s":
         return StartTile(x, y)
+
+def tile_at(x, y):
+    if x < 0 or y < 0:
+        return None
+    try:
+        return world[y][x]
+    except IndexError:
+        return None
 
 class StartTile(MapTile):
     def intro_text(self):
@@ -55,6 +74,9 @@ class EnemyTile(MapTile):
 class VicTile(MapTile):
     def intro_text(self):
         return "you win! nothing..."
+
+    def modify_player(self, player):
+        player.victory = True
 
 class EmptyTile(MapTile):
     def intro_text(self):

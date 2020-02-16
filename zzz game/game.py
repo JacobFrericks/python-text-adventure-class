@@ -1,14 +1,18 @@
-from player import PlayerLink
+from player import Player
 import world
 
 def play():
-    player = PlayerLink()
-    while player.is_alive():
-        tile = world.tile_at(player.x, player.y)
-        print(tile.intro_text())
-        tile.modify_player(player)
-        choose_action(tile, player)
-        print("")
+    print("Escape from Cave Terror!")
+    world.create_world()
+    player = Player()
+    while player.is_alive() and not player.victory:
+        room = world.tile_at(player.x, player.y)
+        print(room.intro_text())
+        room.modify_player(player)
+        if player.is_alive() and not player.victory:
+            choose_action(room, player)
+        elif not player.is_alive():
+            print("Your journey has come to an early end!")
 
 
 def choose_action(tile, player):
@@ -29,13 +33,14 @@ def get_available_actions(tile, player):
         action_adder(actions, 'a', player.attack, "Attack")
     else:
         if world.tile_at(tile.x, tile.y - 1):
-            action_adder(actions, 'w', player.move_up, "Go up")
+            print(world.tile_at(tile.x, tile.y-1))
+            action_adder(actions, 'u', player.move_up, "Go up")
         if world.tile_at(tile.x, tile.y + 1):
-            action_adder(actions, 's', player.move_down, "Go down")
+            action_adder(actions, 'd', player.move_down, "Go down")
         if world.tile_at(tile.x + 1, tile.y):
-            action_adder(actions, 'd', player.move_right, "Go right")
+            action_adder(actions, 'r', player.move_right, "Go right")
         if world.tile_at(tile.x - 1, tile.y):
-            action_adder(actions, 'a', player.move_left, "Go left")
+            action_adder(actions, 'l', player.move_left, "Go left")
 
     return actions
 

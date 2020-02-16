@@ -23,6 +23,8 @@ world = [
 start_location = 1, 1
 
 def tile_at(x, y):
+    if x < 0 or y < 0:
+        return None
     tile = world[y][x]
     if tile == "x":
         return EmptyTile(x, y)
@@ -48,7 +50,7 @@ class EnemyTile(MapTile):
     def modify_player(self, player):
         if self.enemy.is_alive():
             player.hp = player.hp - self.enemy.attack
-            print("Link lost " + self.enemy.attack + " hp.")
+            print("Link lost " + str(self.enemy.attack) + " hp. You have " + str(player.hp) + " HP left")
 
 class VicTile(MapTile):
     def intro_text(self):
@@ -56,5 +58,5 @@ class VicTile(MapTile):
 
 class EmptyTile(MapTile):
     def intro_text(self):
-        return ""
+        return "Nothing is here..."
 

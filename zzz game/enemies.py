@@ -13,3 +13,4 @@ class OctoRock(Enemies):
         self.hp = 30
         self.defense = 1
         self.attack = 2
+        self.name = "OctoRock"
